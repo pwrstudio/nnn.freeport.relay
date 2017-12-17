@@ -1,6 +1,6 @@
 {
-  "name": "taf-socket",
-  "version": "1.0.0",
+  "name": "nnn.freeport.relay",
+  "version": "0.0.1",
   "description": "websocket server",
   "main": "app.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "start": "node app.js"
   },
   "author": "pwr",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.16.2",
     "socket.io": "^2.0.4"

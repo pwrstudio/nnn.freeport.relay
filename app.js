@@ -8,11 +8,16 @@ let allClients = []
 
 io.sockets.on('connection', socket => {
   allClients.push(socket.id)
-  io.emit('list', allClients)
+  io.emit('enter', {user: socket.handshake.headers.origin, list: allClients})
 
   socket.on('disconnect', () => {
     let i = allClients.indexOf(socket.id)
     allClients.splice(i, 1)
-    io.emit('list', allClients)
+    io.emit('leave', {user: socket.handshake.headers.origin, list: allClients})
+  })
+
+  socket.on('view', data => {
+    console.log(data)
+    io.emit('view', {})
   })
 })
