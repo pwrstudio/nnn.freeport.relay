@@ -10,7 +10,8 @@
   "author": "pwr",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.2",
-    "socket.io": "^2.0.4"
+    "geoip-lite": "^1.2.1",
+    "http": "^0.0.0",
+    "socket.io": "^1.7.0"
   }
 }
