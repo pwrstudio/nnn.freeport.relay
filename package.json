@@ -2,10 +2,10 @@
   "name": "nnn.freeport.relay",
   "version": "0.0.1",
   "description": "websocket server",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node server.js"
   },
   "author": "pwr",
   "license": "MIT",

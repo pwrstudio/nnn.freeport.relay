@@ -8,13 +8,6 @@ let allClients = []
 
 io.sockets.on('connection', socket => {
   // TODO: validate client ip
-  // console.log(socket.conn.request.headers.referer)
-  // console.log(socket.handshake.headers.origin)
-  // console.log(socket.handshake)
-  // console.log(socket.handshake.headers['x-real-ip'])
-  // console.log(socket.handshake.headers['x-forwarded-for'])
-  // console.log(socket.request.socket.remoteAddress)
-
   let clientIp = socket.handshake.headers['x-forwarded-for']
   let clientGeo = geoip.lookup(clientIp)
 
@@ -35,8 +28,10 @@ io.sockets.on('connection', socket => {
   let user = {
     ip: clientIp,
     id: socket.id,
-    geo: clientGeo
+    geo: clientGeo,
+    time: new Date()
   }
+
   allClients.push(user)
 
   io.emit('enter', {user: user, list: allClients})
@@ -48,7 +43,6 @@ io.sockets.on('connection', socket => {
   })
 
   socket.on('view', data => {
-    console.log(data)
-    io.emit('view', {})
+    io.emit('view', data)
   })
 })
