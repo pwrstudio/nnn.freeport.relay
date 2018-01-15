@@ -6,7 +6,11 @@ server.listen(PORT)
 
 let allClients = []
 
+console.log('starting.....')
+
 io.sockets.on('connection', socket => {
+  // ENTER
+  console.log('connection')
   // TODO: validate client ip
   let clientIp = socket.handshake.headers['x-forwarded-for']
   let clientGeo = geoip.lookup(clientIp)
@@ -23,8 +27,6 @@ io.sockets.on('connection', socket => {
     }
   }
 
-  console.log(clientGeo)
-
   let user = {
     ip: clientIp,
     id: socket.id,
@@ -33,16 +35,20 @@ io.sockets.on('connection', socket => {
   }
 
   allClients.push(user)
-
   io.emit('enter', {user: user, list: allClients})
+  // END: ENTER
 
+  // DISCONNECT
   socket.on('disconnect', () => {
-    let i = allClients.indexOf(socket.id)
-    allClients.splice(i, 1)
-    io.emit('leave', {user: socket.handshake.headers['x-forwarded-for'], list: allClients})
+    let removedUser = allClients.find(c => c.id === socket.id)
+    allClients = allClients.filter(c => c.id !== socket.id)
+    io.emit('leave', {user: removedUser, list: allClients})
   })
+  // END: DISCONNECT
 
+  // VIEW
   socket.on('view', data => {
     io.emit('view', data)
   })
+  // END: VIEW
 })
