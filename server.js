@@ -51,7 +51,8 @@ io.sockets.on('connection', socket => {
   // VIEW
   socket.on('view', data => {
     io.emit('view', {
-      data: data,
+      hash: data.hash,
+      title: data.title,
       id: socket.id
     })
   })
