@@ -34,7 +34,9 @@ io.sockets.on('connection', socket => {
     time: new Date()
   }
 
-  allClients.push(user)
+  // Add new client to top of array
+  allClients.unshift(user)
+
   io.emit('enter', {user: user, list: allClients})
   // END: ENTER
 
@@ -48,7 +50,10 @@ io.sockets.on('connection', socket => {
 
   // VIEW
   socket.on('view', data => {
-    io.emit('view', data)
+    io.emit('view', {
+      data: data,
+      id: socket.id
+    })
   })
   // END: VIEW
 })
