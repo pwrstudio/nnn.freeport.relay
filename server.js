@@ -57,4 +57,13 @@ io.sockets.on('connection', socket => {
     })
   })
   // END: VIEW
+
+  // CHAT
+  socket.on('chat', data => {
+    io.to(data.id).emit('chat', {
+      msg: data.msg,
+      id: socket.id
+    })
+  })
+  // END: CHAT
 })
