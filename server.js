@@ -1,7 +1,13 @@
 const PORT = process.env.PORT || 9090
 const server = require('http').createServer()
 const io = require('socket.io')(server)
-var geoip = require('geoip-lite')
+const geoip = require('geoip-lite')
+
+const Raven = require('raven')
+Raven.config(
+  'https://ead41eebe20c4a838fed8dbc0e6fb09f:e525dbf532884b54964840819bc3dce3@sentry.io/278971'
+).install()
+
 server.listen(PORT)
 
 let allClients = []
