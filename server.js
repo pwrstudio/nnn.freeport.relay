@@ -43,14 +43,14 @@ io.sockets.on('connection', socket => {
   // Add new client to top of array
   allClients.unshift(user)
 
-  io.emit('enter', {user: user, list: allClients})
+  io.emit('enter', { user: user, list: allClients })
   // END: ENTER
 
   // DISCONNECT
   socket.on('disconnect', () => {
     let removedUser = allClients.find(c => c.id === socket.id)
     allClients = allClients.filter(c => c.id !== socket.id)
-    io.emit('leave', {user: removedUser, list: allClients})
+    io.emit('leave', { user: removedUser, list: allClients })
   })
   // END: DISCONNECT
 
